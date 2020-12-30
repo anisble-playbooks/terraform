@@ -1,0 +1,5 @@
+- name: Download terraform archive Linux 64 bits
+  gather_facts: false
+  win_get_url:
+    url: https://releases.hashicorp.com/terraform/{{ terraform_version }}/terraform_{{ terraform_version }}_windows_amd64.zip
+    dest: "{{ download_dir }}\\{{ terraform_version }}.zip"

@@ -1,0 +1,30 @@
+- name: Create Terraform directory
+  gather_facts: false
+  win_file:
+    path: "{{terraform_dir}}"
+    state: directory
+  register: terraform_directory
+
+- name: Check terraform version
+  gather_facts: false
+  win_shell: "terraform version 2>&1 |Select-Object -First 1 |Select-String {{ terraform_version }}"
+  failed_when: false
+  changed_when: false
+  register: terraform_versions_match
+
+- include: download-windows.yml
+  when: terraform_versions_match.rc != 0
+
+- name: Unarchive Terraform archive
+  gather_facts: false
+  win_unzip:
+    src: "{{ download_dir }}\\{{ terraform_version }}.zip"
+    dest: "{{terraform_dir}}"
+    copy: no
+  when: terraform_versions_match.rc != 0 or terraform_directory is changed
+
+- name: Adding terraform command to user path
+  gather_facts: false
+  win_path:
+    elements: "{{terraform_dir}}"
+    state: present
