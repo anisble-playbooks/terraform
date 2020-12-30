@@ -55,9 +55,9 @@ This is the directory where Terraform is installed into
 
 There are no external dependencies for this role.
 
-## Example Playbook
+## Example Playbooks
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+A playbook for installing the latest version of Terraform to all hosts
 
 ``` yaml
     - hosts: all
@@ -65,6 +65,17 @@ Including an example of how to use your role (for instance, with variables passe
          - terraform
       vars:
         terraform_version: 0.14.3
+```
+
+A playbook for installing a specific version of Terraform to a different location on Windows.
+
+``` yaml
+    - hosts: windows
+      roles:
+         - terraform
+      vars:
+        terraform_version: 0.14.0
+        terraform_dir: "C:\\Program Files\Terraform"
 ```
 
 ## License
