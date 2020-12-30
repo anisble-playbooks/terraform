@@ -1,0 +1,4 @@
+gather_facts: false
+terraform_version: 0.14.0
+download_dir: "C:\\Windows\\Temp"
+terraform_dir: "C:\\ProgramData\\Hashicorp\\Terraform"
