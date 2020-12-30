@@ -1,2 +1,3 @@
 ---
-# vars file for framework
+terraform_version:
+download_dir:
