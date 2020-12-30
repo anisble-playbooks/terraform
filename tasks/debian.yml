@@ -1,0 +1,37 @@
+- name: Create Terraform directory
+  gather_facts: false
+  file:
+    path: "{{terraform_dir}}"
+    state: directory
+  register: terraform_directory
+
+- name: Check terraform version
+  gather_facts: false
+  shell: "terraform version 2>&1 | head -n 1 | grep -q {{terraform_version}}"
+  failed_when: false
+  changed_when: false
+  register: terraform_versions_match
+
+- include: download-debian.yml
+  when: terraform_versions_match.rc != 0
+
+- name: Install unzip to unarchive terraform
+  gather_facts: false
+  package:
+    name: unzip
+    state: present
+
+- name: Unarchive Terraform archive
+  gather_facts: false
+  unarchive:
+    src: "{{ download_dir }}/{{ terraform_version }}.zip"
+    dest: "{{terraform_dir}}"
+    copy: no
+  when: terraform_versions_match.rc != 0 or terraform_directory is changed
+
+- name: Adding terraform command to user path
+  gather_facts: false
+  file:
+    src: "{{terraform_dir}}/terraform"
+    dest: /usr/bin/terraform
+    state: link
