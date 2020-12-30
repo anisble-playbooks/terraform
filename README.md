@@ -1,18 +1,12 @@
 # Terraform
 
----
-
 This role installs the Terraform CLI on Windows or Linux servers.
 
 ## Requirements
 
----
-
 There are no external requirements for this role.
 
 ## Role Variables
-
----
 
 There are a few variables that can be set from the playbook if you like and the role makes an assumption in the defaults
 section.
@@ -59,13 +53,9 @@ This is the directory where Terraform is installed into
 
 ## Dependencies
 
----
-
 There are no external dependencies for this role.
 
 ## Example Playbook
-
----
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
@@ -79,12 +69,8 @@ Including an example of how to use your role (for instance, with variables passe
 
 ## License
 
----
-
 MIT
 
 ## Author Information
-
----
 
 My name is Jeff Patton, feel free to contact me via [issues](https://github.com/anisble-playbooks/terraform/issues).
